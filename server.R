@@ -31,5 +31,3 @@ server <- function(input, output, session){
   output$dataTable <- renderTable({p()$tab})
   #output$dataTable <- renderTable({df()})
 }
-
-shinyApp(ui, server)
