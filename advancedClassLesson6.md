@@ -20,7 +20,7 @@ Add the `plotly` and `leafem` libraries.
     require(plotly)
     require(geosphere)
     require(leafem)
-    source('./weatherFunctions.R')
+    source('./weatherFunctions v2.R')
     stationTib <- getWeatherGeo()
 
 ### UI
@@ -65,8 +65,9 @@ the upper left corner. This requires the `leafem` package.
       # generate the initial plot with all the stations
       output$mymap <- renderLeaflet({
         leaflet(data=stationTib) %>% 
-          addTiles(urlTemplate = "//{s}.tiles.mapbox.com/v3/jcheng.map-5ebohr46/{z}/{x}/{y}.png",
-                   attribution = 'Maps by <a href="http://www.mapbox.com/">Mapbox</a>') %>% 
+        # addTiles(urlTemplate = "//{s}.tiles.mapbox.com/v3/jcheng.map-5ebohr46/{z}/{x}/{y}.png",
+        #          attribution = 'Maps by <a href="http://www.mapbox.com/">Mapbox</a>') %>% 
+        addTiles() %>% 
           addCircleMarkers(lng = ~ lon,
                            lat = ~ lat,
                            label = ~paste0('station:', stationIdentifier),

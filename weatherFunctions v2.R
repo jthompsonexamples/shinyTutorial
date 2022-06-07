@@ -155,14 +155,25 @@ getWeatherGeo <- function(){
                    
   stationList <- list()
   for(st in c(state.abb, 'AS','DC','PR','GU','VI')){
+    count <- 0
     getAPI <- GET(paste0('https://api.weather.gov/stations?state=',
-                         paste(st, collapse=',')))
-    if(getAPI$status_code!=200){print(st)}
+                         st,
+                         '&limit=500'))
+    while(getAPI$status_code!=200 & count<5){
+      print(st)
+      Sys.sleep(5)
+      getAPI <- GET(paste0('https://api.weather.gov/stations?state=',
+                           paste(st, collapse=',')))
+      print(getAPI$status_code)
+      count <- count + 1 
+    }
+    if (count >= 5){next}
     dataAPI <- content(getAPI, 'text') # extract the text info into json format
     dataAPI <- fromJSON(dataAPI) # parse the json
     coordList <- dataAPI$features$geometry$coordinates
     stationList[[st]] <- tibble(lon=sapply(coordList, function(l) l[1]),
-                                lat=sapply(coordList, function(l) l[2]))
+                                lat=sapply(coordList, function(l) l[2]),
+                                stationIdentifier=dataAPI$features$properties$stationIdentifier)
   }
   stationTib <- bind_rows(stationList)
   # station geo is a list with each coordinate a vector inside a list, extract

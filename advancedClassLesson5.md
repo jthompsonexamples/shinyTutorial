@@ -78,8 +78,9 @@ based on the dates on the date range slider.
     server <- function(input, output, session){
       output$mymap <- renderLeaflet({
         leaflet(data=stationTib) %>% 
-          addTiles(urlTemplate = "//{s}.tiles.mapbox.com/v3/jcheng.map-5ebohr46/{z}/{x}/{y}.png",
-                   attribution = 'Maps by <a href="http://www.mapbox.com/">Mapbox</a>') %>% 
+        # addTiles(urlTemplate = "//{s}.tiles.mapbox.com/v3/jcheng.map-5ebohr46/{z}/{x}/{y}.png",
+        #          attribution = 'Maps by <a href="http://www.mapbox.com/">Mapbox</a>') %>% 
+        addTiles() %>% 
           addCircleMarkers(lng = ~ lon,
                            lat = ~ lat,
                            label = ~paste0('station:', stationIdentifier),

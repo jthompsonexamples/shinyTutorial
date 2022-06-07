@@ -8,8 +8,8 @@ require(plotly)
 require(geosphere)
 
 source('./weatherFunctions v2.R')
-load('./tempData.RData')
-#stationTib <- getWeatherGeo()
+# load('./tempData.RData')
+stationTib <- getWeatherGeo()
 
 ui <- navbarPage(title='Shiny Tutorial',
   tabPanel(
@@ -121,8 +121,9 @@ server <- function(input, output, session){
   #### 2
   output$mymap2 <- renderLeaflet({
     leaflet() %>% 
-      addTiles(urlTemplate = "//{s}.tiles.mapbox.com/v3/jcheng.map-5ebohr46/{z}/{x}/{y}.png",
-               attribution = 'Maps by <a href="http://www.mapbox.com/">Mapbox</a>') %>% 
+      # addTiles(urlTemplate = "//{s}.tiles.mapbox.com/v3/jcheng.map-5ebohr46/{z}/{x}/{y}.png",
+      #          attribution = 'Maps by <a href="http://www.mapbox.com/">Mapbox</a>') %>% 
+      addTiles() %>% 
       setView(-98.5795, 39.8283, zoom=3)
   })
   observe({
@@ -137,11 +138,12 @@ server <- function(input, output, session){
   #### 3
   output$mymap3 <- renderLeaflet({
     leaflet(data=stationTib) %>% 
-      addTiles(urlTemplate = "//{s}.tiles.mapbox.com/v3/jcheng.map-5ebohr46/{z}/{x}/{y}.png",
-               attribution = 'Maps by <a href="http://www.mapbox.com/">Mapbox</a>') %>% 
+      # addTiles(urlTemplate = "//{s}.tiles.mapbox.com/v3/jcheng.map-5ebohr46/{z}/{x}/{y}.png",
+      #          attribution = 'Maps by <a href="http://www.mapbox.com/">Mapbox</a>') %>% 
+      addTiles() %>%  
       addCircleMarkers(lng = ~ lon,
                        lat = ~ lat,
-                       #label = ~paste0('station:', stationIdentifier),
+                       label = ~paste0('station:', stationIdentifier),
                        #label = ~(hoverText),
                        labelOptions = labelOptions(textOnly = FALSE),
                        radius = 3,
@@ -163,11 +165,12 @@ server <- function(input, output, session){
   #### 4
   output$mymap4 <- renderLeaflet({
     leaflet(data=stationTib) %>% 
-      addTiles(urlTemplate = "//{s}.tiles.mapbox.com/v3/jcheng.map-5ebohr46/{z}/{x}/{y}.png",
-               attribution = 'Maps by <a href="http://www.mapbox.com/">Mapbox</a>') %>% 
+      # addTiles(urlTemplate = "//{s}.tiles.mapbox.com/v3/jcheng.map-5ebohr46/{z}/{x}/{y}.png",
+      #          attribution = 'Maps by <a href="http://www.mapbox.com/">Mapbox</a>') %>% 
+      addTiles() %>% 
       addCircleMarkers(lng = ~ lon,
                        lat = ~ lat,
-                       #label = ~paste0('station:', stationIdentifier),
+                       label = ~paste0('station:', stationIdentifier),
                        #label = ~(hoverText),
                        labelOptions = labelOptions(textOnly = FALSE),
                        radius = 3,
@@ -194,11 +197,12 @@ server <- function(input, output, session){
   #### 5
   output$mymap5 <- renderLeaflet({
     leaflet(data=stationTib) %>% 
-      addTiles(urlTemplate = "//{s}.tiles.mapbox.com/v3/jcheng.map-5ebohr46/{z}/{x}/{y}.png",
-               attribution = 'Maps by <a href="http://www.mapbox.com/">Mapbox</a>') %>% 
+      # addTiles(urlTemplate = "//{s}.tiles.mapbox.com/v3/jcheng.map-5ebohr46/{z}/{x}/{y}.png",
+      #          attribution = 'Maps by <a href="http://www.mapbox.com/">Mapbox</a>') %>% 
+      addTiles() %>% 
       addCircleMarkers(lng = ~ lon,
                        lat = ~ lat,
-                       #label = ~paste0('station:', stationIdentifier),
+                       label = ~paste0('station:', stationIdentifier),
                        #label = ~(hoverText),
                        labelOptions = labelOptions(textOnly = FALSE),
                        radius = 3,
@@ -237,11 +241,12 @@ server <- function(input, output, session){
   #### 6
   output$mymap6 <- renderLeaflet({
     leaflet(data=stationTib) %>% 
-      addTiles(urlTemplate = "//{s}.tiles.mapbox.com/v3/jcheng.map-5ebohr46/{z}/{x}/{y}.png",
-               attribution = 'Maps by <a href="http://www.mapbox.com/">Mapbox</a>') %>% 
+      # addTiles(urlTemplate = "//{s}.tiles.mapbox.com/v3/jcheng.map-5ebohr46/{z}/{x}/{y}.png",
+      #          attribution = 'Maps by <a href="http://www.mapbox.com/">Mapbox</a>') %>% 
+      addTiles() %>% 
       addCircleMarkers(lng = ~ lon,
                        lat = ~ lat,
-                       #label = ~paste0('station:', stationIdentifier),
+                       label = ~paste0('station:', stationIdentifier),
                        #label = ~(hoverText),
                        labelOptions = labelOptions(textOnly = FALSE),
                        radius = 3,
